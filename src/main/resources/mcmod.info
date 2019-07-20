@@ -1,0 +1,16 @@
+[
+{
+  "modid": "superpickaxe",
+  "name": "Super Tools Mod",
+  "description": "Provide some shit.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["dozono"],
+  "credits": "ci010",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

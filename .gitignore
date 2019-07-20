@@ -1,0 +1,33 @@
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+crash-reports
+config
+eclipse
+logs
+mods
+saves
+resourcepacks
+options.txt
+usernamecache.json
+usercache.json
