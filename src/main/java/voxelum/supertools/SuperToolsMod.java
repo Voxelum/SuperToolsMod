@@ -12,6 +12,7 @@ import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.network.play.server.SPacketExplosion;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
@@ -46,15 +47,28 @@ public class SuperToolsMod {
     public static final String VERSION = "1.0";
 
     public static final Item SUPER_PICKAXE = new ItemSuperPickaxe(Item.ToolMaterial.DIAMOND);
+    public static final Item SUPER_SWORD = new ItemSuperSword(Item.ToolMaterial.DIAMOND);
+    public static final Item SUPER_HOE = new ItemSuperHoe(Item.ToolMaterial.DIAMOND);
 
     private static Logger logger;
+
+    public static void destroyRange(World world, BlockPos center, int miX, int maX, int miY, int maY, int miZ, int maZ) {
+        for (int x = miX; x <= maX; x++) {
+            for (int y = miY; y <= maY; y++) {
+                for (int z = miZ; z <= maZ; z++) {
+                    BlockPos pos = center.add(x, y, z);
+                    if (world.getBlockState(pos).getBlock() == Blocks.BEDROCK) continue;
+                    world.destroyBlock(pos, true);
+                }
+            }
+        }
+    }
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = event.getModLog();
         MinecraftForge.EVENT_BUS.register(this);
         MinecraftForge.EVENT_BUS.register(proxy);
-
     }
 
     @EventHandler
@@ -70,6 +84,13 @@ public class SuperToolsMod {
     public static class CommonProxy {
         public void init(FMLInitializationEvent event) {
 
+        }
+
+        @SubscribeEvent
+        public void regThings(RegistryEvent.Register<Item> itemRegEvent) {
+            itemRegEvent.getRegistry().register(SUPER_PICKAXE);
+            itemRegEvent.getRegistry().register(SUPER_HOE);
+            itemRegEvent.getRegistry().register(SUPER_SWORD);
         }
 
         public Explosion createExplosionServer(World world, @Nullable Entity entityIn, double x, double y, double z, float strength, boolean isFlaming, boolean isSmoking, boolean damageEntity) {
@@ -102,6 +123,8 @@ public class SuperToolsMod {
         @SubscribeEvent
         public void modelRegEvent(ModelRegistryEvent event) {
             ModelLoader.setCustomModelResourceLocation(SUPER_PICKAXE, 0, new ModelResourceLocation(SUPER_PICKAXE.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(SUPER_SWORD, 0, new ModelResourceLocation(SUPER_SWORD.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(SUPER_HOE, 0, new ModelResourceLocation(SUPER_HOE.getRegistryName(), "inventory"));
         }
 
 
@@ -116,15 +139,6 @@ public class SuperToolsMod {
 
     }
 
-    @SubscribeEvent
-    public void regThings(RegistryEvent.Register<Item> itemRegEvent) {
-        itemRegEvent.getRegistry().register(SUPER_PICKAXE);
-    }
-
-    @SubscribeEvent
-    public void onEntityInteract(PlayerInteractEvent.EntityInteract event) {
-        Entity entity = event.getTarget();
-    }
 
     @SubscribeEvent
     public void handleCapabilityEvent(AttachCapabilitiesEvent<EntityWolf> event) {
