@@ -11,7 +11,7 @@ public class GuiDogInventoryContainer extends GuiContainer {
         super(inventorySlotsIn);
 
         this.xSize = 176;
-        this.ySize = 68;
+        this.ySize = 133;
     }
 
     @Override

@@ -49,6 +49,7 @@ public class SuperToolsMod {
     public static final Item SUPER_PICKAXE = new ItemSuperPickaxe(Item.ToolMaterial.DIAMOND);
     public static final Item SUPER_SWORD = new ItemSuperSword(Item.ToolMaterial.DIAMOND);
     public static final Item SUPER_HOE = new ItemSuperHoe(Item.ToolMaterial.DIAMOND);
+    public static final Item SUPER_AXE = new ItemSuperAxe(Item.ToolMaterial.DIAMOND);
 
     private static Logger logger;
 
@@ -91,6 +92,7 @@ public class SuperToolsMod {
             itemRegEvent.getRegistry().register(SUPER_PICKAXE);
             itemRegEvent.getRegistry().register(SUPER_HOE);
             itemRegEvent.getRegistry().register(SUPER_SWORD);
+            itemRegEvent.getRegistry().register(SUPER_AXE);
         }
 
         public Explosion createExplosionServer(World world, @Nullable Entity entityIn, double x, double y, double z, float strength, boolean isFlaming, boolean isSmoking, boolean damageEntity) {
@@ -125,6 +127,8 @@ public class SuperToolsMod {
             ModelLoader.setCustomModelResourceLocation(SUPER_PICKAXE, 0, new ModelResourceLocation(SUPER_PICKAXE.getRegistryName(), "inventory"));
             ModelLoader.setCustomModelResourceLocation(SUPER_SWORD, 0, new ModelResourceLocation(SUPER_SWORD.getRegistryName(), "inventory"));
             ModelLoader.setCustomModelResourceLocation(SUPER_HOE, 0, new ModelResourceLocation(SUPER_HOE.getRegistryName(), "inventory"));
+            ModelLoader.setCustomModelResourceLocation(SUPER_AXE, 0, new ModelResourceLocation(SUPER_AXE.getRegistryName(), "inventory"));
+
         }
 
 
